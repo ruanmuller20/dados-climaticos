@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Fetch para API Local</title>
+</head>
+<body>
+    <h1>Exemplo de Fetch para API Local</h1>
+    <p id="resultado">Esperando resposta da API...</p>
+    
+    <script>
+        // URL da API local que você quer fazer a solicitação
+        const apiUrl = 'http://192.168.100.6:8000/0.034456/-51.0666';  // Atualize a URL conforme necessário
+
+        // Função para buscar dados da API
+        async function buscarDados() {
+            try {
+                let response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error('Erro na solicitação: ' + response.status);
+                }
+                let data = await response.json();
+                document.getElementById('resultado').textContent = JSON.stringify(data);
+            } catch (error) {
+                document.getElementById('resultado').textContent = 'Ocorreu um erro: ' + error.message;
+            }
+        }
+
+        // Chama a função para buscar os dados quando a página carrega
+        window.onload = buscarDados;
+    </script>
+</body>
+</html>
