@@ -23,8 +23,8 @@ cursor.execute("DELETE FROM dados")
 
 # Fazer a requisição à API e extrair os dados
 chave_api = "70c85c4d9e45c8a96fd7ab5d1efaec5e"
-lat = '-12.9714'
-long = '-38.5014'
+lat = '-12.9715'
+long = '-38.5015'
 link_api = f'http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={long}&appid={chave_api}&lang=pt-br'
 requisicao = requests.get(link_api).json()
 dados_ar = requisicao['list'][0]['components']
@@ -92,5 +92,5 @@ fig.update_layout(coloraxis_colorbar=dict(
 ))
 
 # Salvar o gráfico como HTML e abrir no navegador
-fig.write_html("qualidade_do_ar.html")
-webbrowser.open("qualidade_do_ar.html")
+fig.write_html("qualidade_do_ar2.html")
+webbrowser.open("qualidade_do_ar2.html")

@@ -12,9 +12,7 @@ document.querySelectorAll('path').forEach((el) => {
 	});
 
 	el.addEventListener('click', (event) => {
-		console.log(event.target.id);
-        //console.log(event.target.data-lat);
-       //console.log(event.target);
+	   console.log(event.target.id);
        const Div1 = document.querySelector('.coordinates');
        const meuid = '#'+ event.target.id
        const coordinatesDiv = document.querySelector(meuid);
@@ -36,17 +34,18 @@ document.onmousemove = function (e) {
 
 function mostrarCard(estado) {
 	var card = document.getElementById('card');
-	//var estadoInfo = document.getElementById('estadoInfo');
 	var titleInfo = document.getElementById('titleInfo')
 	titleInfo.innerHTML = 'Informações climáticas sobre ' + estado;
 	
     card.style.display = 'block';
-	mostrargrafico();
+	setTimeout(mostrargrafico, 1000);
+	
 }
 
 function mostrargrafico(){
 	var grafico = document.getElementById('grafico');
 	grafico.style.display = 'block';
+	grafico.innerHTML = '<iframe loading="lazy" src="qualidade_do_ar2.html" width="600" height="350"></iframe>';
     
 	
 }
@@ -54,6 +53,10 @@ function mostrargrafico(){
 function redirectTo(url) {
     window.location.href = url;
 }
+
+
+
+
 
 async function buscarDados(apiUrl) {
 	try {
@@ -63,9 +66,7 @@ async function buscarDados(apiUrl) {
 		}
 		let data = await response.json();
 		estadoInfo.innerHTML = data.message
-		//document.getElementById('resultado').textContent = JSON.stringify(data);
 	} catch (error) {
-	//	document.getElementById('resultado').textContent = 'Ocorreu um erro: ' + error.message;
 	alert(error)
 	}
 }
