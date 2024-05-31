@@ -20,7 +20,7 @@ document.querySelectorAll('path').forEach((el) => {
        const longitude = coordinatesDiv.getAttribute('data-long');
        console.log("Latitude da Capital = " + latitude);
        console.log("Longitude da Capital = " + longitude);
-	   const apiUrl = 'http://192.168.100.6:8000/'+ latitude +'/'+ longitude;
+	   const apiUrl = 'http://192.168.100.179:8000/'+ latitude +'/'+ longitude;
        buscarDados(apiUrl);
 	});
 
