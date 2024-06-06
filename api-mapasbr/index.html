@@ -5,23 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapa do Brasil</title>
     <link rel="stylesheet" href="style.css">
-</head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 <body>
 
 <div id="container-items">
 	<div id="card" style="display: none;">
-		<h2 id="titleInfo"></h2>
-		<p id="estadoInfo"></p>
+		<div class="titleInfo">
+			<h2 id="titleInfo"></h2>
+		</div>
+
+		<h2 id="estadoInfo"></h2>
+		
+		<div class="temp-clima">
+			<span id="tempoInfo"></span>
+			<h1><span id="temperaturaInfo"></span></h3>
+		</div>
+			
+		<div class="descricaoInfo">
+			<h2><span id="descricaoInfo"></span></h2>
+		</div>
 		
 		
-		
+		<div id="min_max">
+			<h2><span id="temp_min"></span></h2>
+			<h2><span id="temp_max"></span></h2>
+		</div>
 	</div>
  	
     
-	<div id="grafico" style="display: none;">
-	<!-- <iframe loading="lazy" src="qualidade_do_ar2.html" width="600" height="350">
+	 <div id="grafico" style="display: none;">
+	 <iframe loading="lazy" src="qualidade_do_ar2.html">
 	
-	  </iframe> -->
+	  </iframe>
 	</div> 
 
 </div>

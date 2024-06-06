@@ -20,7 +20,7 @@ document.querySelectorAll('path').forEach((el) => {
        const longitude = coordinatesDiv.getAttribute('data-long');
        console.log("Latitude da Capital = " + latitude);
        console.log("Longitude da Capital = " + longitude);
-	   const apiUrl = 'http://192.168.100.179:8000/'+ latitude +'/'+ longitude;
+	   const apiUrl = 'http://192.168.100.8:8000/'+ latitude +'/'+ longitude;
        buscarDados(apiUrl);
 	});
 
@@ -35,10 +35,10 @@ document.onmousemove = function (e) {
 function mostrarCard(estado) {
 	var card = document.getElementById('card');
 	var titleInfo = document.getElementById('titleInfo')
-	titleInfo.innerHTML = 'Informações climáticas sobre ' + estado;
+	titleInfo.innerHTML = 'Informações climáticas sobre: <br> ' + estado;
 	
     card.style.display = 'block';
-	setTimeout(mostrargrafico, 1000);
+	setTimeout(mostrargrafico, 500);
 	
 }
 
@@ -66,6 +66,13 @@ async function buscarDados(apiUrl) {
 		}
 		let data = await response.json();
 		estadoInfo.innerHTML = data.message
+		temperaturaInfo.innerHTML = data.temperatura
+		tempoInfo.innerHTML = data.tempo
+		descricaoInfo.innerHTML = data.descricao
+		temp_min.innerHTML = `Min ${data.temp_min}`
+		temp_max.innerHTML = `Max ${data.temp_max}`
+		console.log(data.hora)
+		
 	} catch (error) {
 	alert(error)
 	}

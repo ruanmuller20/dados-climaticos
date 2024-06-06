@@ -6,7 +6,12 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import sqlite3
-import webbrowser
+from datetime import datetime
+import logging
+import sys
+
+logger = logging.getLogger('uvicorn.error')
+logger.setLevel(logging.DEBUG)
 
 app = FastAPI()
 
@@ -125,10 +130,119 @@ async def root(lat: str,long: str):
         nomeCidade = requisicao['name']
         descricao = requisicao['weather'][0]['description'] # ['weather'][0] é o campo onde a descrição está dentro o campo ['description'] serve apenas para pegar a informação de descrição do céu/temperatura que está dentro de ['weather'][0] 
         temperatura = requisicao['main']['temp']- 273.15 #
-        grafico_ar(lat,long)
+        temp_min = requisicao['main']['temp_min'] - 273.15  # Converte Kelvin para Celsius
+        temp_max = requisicao['main']['temp_max'] - 273.15  # Converte Kelvin para Celsius
+        horaAtual = datetime.now() #AQUI EU COLOQUEI UMA VARIAVEL E CHAMEI A CLASSE DATATIME.NOW() PARA OBTER A DATA EXATA
+               
+        hora = int(horaAtual.hour) #AQUI EU COLOQUEI A VARIAVEL Hora = HoraAtual."hour" para obter a hora exata
         
+        grafico_ar(lat,long)
       
-        return {"message": f'Sua cidade é {nomeCidade}, O tempo agora está {descricao},A temperatura agora está {temperatura:.0f}°C'}
+      #QUANDO A HORA FOR MAIOR DO QUE 6 E MENOR DO QUE 18, A IMAGEM SERÁ DO SOL
+      # 
+      ##              V              and      F
+        if (descricao == 'céu limpo') and (hora > 6 and hora < 17):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/04.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',
+        "hora":f'{hora}',
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'  
+                }
+       
+       #QUANDO A HORA FOR MAIOR DO QUE 19 E MENOR DO QUE 5, A IMAGEM SERÁ DA LUA
+       ##                       V  and  V
+        elif (descricao == 'céu limpo') and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/07.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',
+        "hora":f'{hora}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'
+                }
+        
+        #QUANDO A HORA FOR MAIOR DO QUE 6 E MENOR DO QUE 18, A IMAGEM SERÁ DO SOL
+        elif descricao == 'algumas nuvens' or descricao == 'nuvens dispersas' and (hora > 6 and hora < 17):
+          return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/Nublado.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+        #QUANDO A HORA FOR MAIOR DO QUE 18 E MENOR DO QUE 6, A IMAGEM SERÁ DA LUA
+        elif descricao == 'algumas nuvens' or descricao == 'nuvens dispersas' and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+          return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/06.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+              }
+         #QUANDO A HORA FOR MAIOR DO QUE 6 E MENOR DO QUE 18, A IMAGEM SERÁ DO SOL
+        elif descricao == 'nublado' and (hora > 6 and hora < 17):
+          return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/09.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+        #QUANDO A HORA FOR MAIOR DO QUE 18 E MENOR DO QUE 6, A IMAGEM SERÁ DA LUA
+        elif descricao == 'nublado' and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+          return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/06.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+        #QUANDO A HORA FOR MAIOR DO QUE 6 E MENOR DO QUE 18, A IMAGEM SERÁ DO SOL
+        elif descricao == 'chuva leve' or descricao == 'chuva moderada' and (hora > 6 and hora < 17):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/08.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+        #QUANDO A HORA FOR MAIOR DO QUE 18 E MENOR DO QUE 6, A IMAGEM SERÁ DA LUA
+        elif descricao == 'chuva leve' or descricao == 'chuva moderada' and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/08.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+        #QUANDO A HORA FOR MAIOR DO QUE 6 E MENOR DO QUE 18, A IMAGEM SERÁ DO SOL
+        elif descricao == 'névoa' and (hora > 6 and hora < 17):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/05.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+        #QUANDO A HORA FOR MAIOR DO QUE 18 E MENOR DO QUE 6, A IMAGEM SERÁ DA LUA
+        elif descricao == 'névoa' and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/05.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+
+        # else :
+        #     return {"message": f'{nomeCidade}',
+        #         "temperatura":f'{temperatura:.0f}°',
+        #         "tempo": "<img src='./src/05.png' alt='else'>",
+        #         "descricao":f'{descricao}'      
+        #                 }
+
     except Exception as e:
         return {"message": f'Não foi possivel encontrar Latitude {lat} e Longitude {long}' }
   
