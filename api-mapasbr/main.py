@@ -141,6 +141,7 @@ async def root(lat: str,long: str):
       #QUANDO A HORA FOR MAIOR DO QUE 6 E MENOR DO QUE 18, A IMAGEM SERÁ DO SOL
       # 
       ##              V              and      F
+      
         if (descricao == 'céu limpo') and (hora > 6 and hora < 17):
          return {"message": f'{nomeCidade}',
         "temperatura":f'{temperatura:.0f}°',
@@ -153,7 +154,7 @@ async def root(lat: str,long: str):
        
        #QUANDO A HORA FOR MAIOR DO QUE 19 E MENOR DO QUE 5, A IMAGEM SERÁ DA LUA
        ##                       V  and  V
-        elif (descricao == 'céu limpo') and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+        elif (descricao == 'céu limpo') and ((hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5)):
          return {"message": f'{nomeCidade}',
         "temperatura":f'{temperatura:.0f}°',
         "tempo": "<img src='./src/07.png' alt='Nuvem'>",
@@ -173,11 +174,11 @@ async def root(lat: str,long: str):
         "temp_max":f'{temp_max:.1f}'      
                 }
         #QUANDO A HORA FOR MAIOR DO QUE 18 E MENOR DO QUE 6, A IMAGEM SERÁ DA LUA
-        elif descricao == 'algumas nuvens' or descricao == 'nuvens dispersas' and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+        elif descricao == 'algumas nuvens' or descricao == 'nuvens dispersas' and ((hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5)):
           return {"message": f'{nomeCidade}',
         "temperatura":f'{temperatura:.0f}°',
         "tempo": "<img src='./src/06.png' alt='Nuvem'>",
-        "descricao":f'{descricao}',      
+        "descricao":f'{descricao}',
         "temp_min":f'{temp_min:.1f}',    
         "temp_max":f'{temp_max:.1f}'      
               }
@@ -191,10 +192,10 @@ async def root(lat: str,long: str):
         "temp_max":f'{temp_max:.1f}'      
                 }
         #QUANDO A HORA FOR MAIOR DO QUE 18 E MENOR DO QUE 6, A IMAGEM SERÁ DA LUA
-        elif descricao == 'nublado' and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+        elif descricao == 'nublado' and ((hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5)):
           return {"message": f'{nomeCidade}',
         "temperatura":f'{temperatura:.0f}°',
-        "tempo": "<img src='./src/06.png' alt='Nuvem'>",
+        "tempo": "<img src='./src/05.png' alt='Nuvem'>",
         "descricao":f'{descricao}',      
         "temp_min":f'{temp_min:.1f}',    
         "temp_max":f'{temp_max:.1f}'      
@@ -209,7 +210,7 @@ async def root(lat: str,long: str):
         "temp_max":f'{temp_max:.1f}'      
                 }
         #QUANDO A HORA FOR MAIOR DO QUE 18 E MENOR DO QUE 6, A IMAGEM SERÁ DA LUA
-        elif descricao == 'chuva leve' or descricao == 'chuva moderada' and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+        elif descricao == 'chuva leve' or descricao == 'chuva moderada' and ((hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5)):
          return {"message": f'{nomeCidade}',
         "temperatura":f'{temperatura:.0f}°',
         "tempo": "<img src='./src/08.png' alt='Nuvem'>",
@@ -227,10 +228,19 @@ async def root(lat: str,long: str):
         "temp_max":f'{temp_max:.1f}'      
                 }
         #QUANDO A HORA FOR MAIOR DO QUE 18 E MENOR DO QUE 6, A IMAGEM SERÁ DA LUA
-        elif descricao == 'névoa' and (hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5):
+        elif descricao == 'névoa' and ((hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5)):
          return {"message": f'{nomeCidade}',
         "temperatura":f'{temperatura:.0f}°',
         "tempo": "<img src='./src/05.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+        
+        elif descricao == 'trovoadas' or descricao == 'trovoada com chuva fraca' and ((hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5)):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/10.png' alt='Nuvem'>",
         "descricao":f'{descricao}',      
         "temp_min":f'{temp_min:.1f}',    
         "temp_max":f'{temp_max:.1f}'      
