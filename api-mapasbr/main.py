@@ -237,7 +237,7 @@ async def root(lat: str,long: str):
         elif descricao == 'névoa' and (hora > 6 and hora < 17):
          return {"message": f'{nomeCidade}',
         "temperatura":f'{temperatura:.0f}°',
-        "tempo": "<img src='./src/05.png' alt='Nuvem'>",
+        "tempo": "<img src='./src/12.png' alt='Nuvem'>",
         "descricao":f'{descricao}',      
         "temp_min":f'{temp_min:.1f}',    
         "temp_max":f'{temp_max:.1f}'      
@@ -246,7 +246,7 @@ async def root(lat: str,long: str):
         elif descricao == 'névoa' and ((hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5)):
          return {"message": f'{nomeCidade}',
         "temperatura":f'{temperatura:.0f}°',
-        "tempo": "<img src='./src/05.png' alt='Nuvem'>",
+        "tempo": "<img src='./src/12.png' alt='Nuvem'>",
         "descricao":f'{descricao}',      
         "temp_min":f'{temp_min:.1f}',    
         "temp_max":f'{temp_max:.1f}'      
