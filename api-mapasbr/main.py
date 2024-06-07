@@ -236,12 +236,14 @@ async def root(lat: str,long: str):
         "temp_max":f'{temp_max:.1f}'      
                 }
 
-        # else :
-        #     return {"message": f'{nomeCidade}',
-        #         "temperatura":f'{temperatura:.0f}°',
-        #         "tempo": "<img src='./src/05.png' alt='else'>",
-        #         "descricao":f'{descricao}'      
-        #                 }
+        else :
+            return {"message": f'{nomeCidade}',
+                "temperatura":f'{temperatura:.0f}°',
+                "tempo": "<img src='./src/05.png' alt='else'>",
+                "descricao":f'{descricao}',
+                "temp_min":f'{temp_min:.1f}',
+                "temp_max":f'{temp_max:.1f}'      
+                        }
 
     except Exception as e:
         return {"message": f'Não foi possivel encontrar Latitude {lat} e Longitude {long}' }
