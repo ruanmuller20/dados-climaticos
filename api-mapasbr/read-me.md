@@ -1,10 +1,15 @@
-# Dependencias pip para instalar antes de rodar o projeto
+# Dependencias pip para instalar antes de rodar o projeto (obs: Usar versão mais atualizada do python)
   pip install fastapi[all]
   pip install requests
   pip install fastapi uvicornpip
+  pip install numpy
+  pip install plotly
+  pip install pandas
+  pip install db-sqlite3
+  
 
-# Depois da instalação é preciso ativar o plugin cliando duas vezes no icone
+# Passo a Passo para rodar o projeto
+    Troque pelo seu ip local na linha 23 no arquivo script.js
     depois disso rode o comando no terminal na pasta do projeto   
-    rodar projeto com uvicorn main:app  --reload --host 0.0.0.0 --port 8000 elimina cors
-    abra o arquivo index.html no seu chrome
-    troque pelo seu ip local arquivo da linha 14 no index.html
+    rodar projeto com 'uvicorn main:app  --reload --host 0.0.0.0 --port 8000' ou clicar no arquivo 'rodar_servidor.bat'
+    Abra o arquivo index.html no seu chrome

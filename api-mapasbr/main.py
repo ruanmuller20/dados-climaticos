@@ -7,11 +7,8 @@ import pandas as pd
 import plotly.express as px
 import sqlite3
 from datetime import datetime
-import logging
 import sys
 
-logger = logging.getLogger('uvicorn.error')
-logger.setLevel(logging.DEBUG)
 
 app = FastAPI()
 
@@ -218,6 +215,24 @@ async def root(lat: str,long: str):
         "temp_min":f'{temp_min:.1f}',    
         "temp_max":f'{temp_max:.1f}'      
                 }
+            #QUANDO A HORA FOR MAIOR DO QUE 6 E MENOR DO QUE 18, A IMAGEM SERÁ DO SOL
+        elif descricao == 'chuva forte' or descricao == 'chuva muito forte' and (hora > 6 and hora < 17):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/11.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+        #QUANDO A HORA FOR MAIOR DO QUE 18 E MENOR DO QUE 6, A IMAGEM SERÁ DA LUA
+        elif descricao == 'chuva forte' or descricao == 'chuva muito forte' and ((hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5)):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/11.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
         #QUANDO A HORA FOR MAIOR DO QUE 6 E MENOR DO QUE 18, A IMAGEM SERÁ DO SOL
         elif descricao == 'névoa' and (hora > 6 and hora < 17):
          return {"message": f'{nomeCidade}',
@@ -236,6 +251,16 @@ async def root(lat: str,long: str):
         "temp_min":f'{temp_min:.1f}',    
         "temp_max":f'{temp_max:.1f}'      
                 }
+            
+        elif descricao == 'trovoadas' or descricao == 'trovoada com chuva fraca' and (hora > 6 and hora < 17):
+         return {"message": f'{nomeCidade}',
+        "temperatura":f'{temperatura:.0f}°',
+        "tempo": "<img src='./src/10.png' alt='Nuvem'>",
+        "descricao":f'{descricao}',      
+        "temp_min":f'{temp_min:.1f}',    
+        "temp_max":f'{temp_max:.1f}'      
+                }
+
         
         elif descricao == 'trovoadas' or descricao == 'trovoada com chuva fraca' and ((hora >= 18 and hora <= 23 ) or(  hora >=0 and  hora <=5)):
          return {"message": f'{nomeCidade}',
