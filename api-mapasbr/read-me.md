@@ -1,7 +1,6 @@
 # Dependencias pip para instalar antes de rodar o projeto (obs: Usar versão mais atualizada do python)
   pip install fastapi[all]
   pip install requests
-  pip install fastapi uvicornpip
   pip install numpy
   pip install plotly
   pip install pandas
